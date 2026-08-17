@@ -38,8 +38,8 @@ struct NEXUSPeripheral: Identifiable, Equatable {
 
 extension BluetoothManager: CBCentralManagerDelegate {
     nonisolated func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        Task { @MainActor in
-            self.state = central.state
+        Task { @MainActor [weak self] in
+            self?.state = central.state
         }
     }
 
@@ -47,13 +47,15 @@ extension BluetoothManager: CBCentralManagerDelegate {
                                    didDiscover peripheral: CBPeripheral,
                                    advertisementData: [String : Any],
                                    rssi RSSI: NSNumber) {
-        Task { @MainActor in
+        let item = NEXUSPeripheral(
+            id: peripheral.identifier,
+            name: peripheral.name ?? "Unknown device",
+            rssi: RSSI.intValue
+        )
+
+        Task { @MainActor [weak self] in
+            guard let self else { return }
             self.peripherals[peripheral.identifier] = peripheral
-            let item = NEXUSPeripheral(
-                id: peripheral.identifier,
-                name: peripheral.name ?? "Unknown device",
-                rssi: RSSI.intValue
-            )
             if let index = self.discovered.firstIndex(where: { $0.id == item.id }) {
                 self.discovered[index] = item
             } else {
