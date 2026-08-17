@@ -1,0 +1,11 @@
+{
+  "name": "NEXUS Control Center",
+  "short_name": "NEXUS",
+  "description": "Futuristic control center for devices, automation, gaming and media.",
+  "start_url": "/-nexus/",
+  "scope": "/-nexus/",
+  "display": "standalone",
+  "background_color": "#07070b",
+  "theme_color": "#07070b",
+  "icons": []
+}
