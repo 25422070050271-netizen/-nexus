@@ -25,7 +25,7 @@ The web app must never claim a device is connected unless an integration reports
 
 ## NEXUS iOS
 
-The iOS client is a native SwiftUI app. SwiftUI is Apple's recommended approach for new Apple-platform apps, and Core Bluetooth provides the native BLE layer needed for compatible peripherals. citeturn0search1turn0search3
+The iOS client is a native SwiftUI app. SwiftUI is Apple's recommended approach for new Apple-platform apps, while Core Bluetooth provides the native BLE layer needed for compatible peripherals.
 
 Initial modules:
 
